@@ -50,11 +50,9 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 ```{r tidy=TRUE}
 #1. Create a function that choose a door. 
 door <- function(choice){
-  if (choice %in% c(1,2,3)) {
-    door_choice <- list(door_selected= choice)
-    class(door_choice) <- "door"
-  return(door_choice)
-    }
+      door_choice <- list(door_selected= choice)
+      class(door_choice) <- "door"
+      return(door_choice)
   }
 
 #Test
@@ -76,4 +74,11 @@ PlayGame(door(1))
 
 #3
 
+new_door <- function(door_choice){
+  if(!(door_choice %in% c(1,2,3))) {
+    stop("Error: You need to choose a door between 1 to 3")
+  }
+  return(door(door_choice))
+}
+new_door(2)
 ```
