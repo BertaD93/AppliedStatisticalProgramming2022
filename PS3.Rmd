@@ -7,12 +7,14 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{=tex}
 \begin{center}
 {\Large{\textbf{Problem Set 3}}} \\
 \vspace{4 bp}
 Due Wednesday, March 2, 10:00 AM (Before Class) \\
 \end{center}
-
+```
+```{=tex}
 \section*{Instructions}
 \begin{enumerate}
   \item The following questions should each be answered within an R script. Be sure to provide many comments in the script to facilitate grading. Undocumented code will not be graded.
@@ -20,14 +22,16 @@ Due Wednesday, March 2, 10:00 AM (Before Class) \\
   \item You may work in teams, but each student should develop their own Rmarkdown file. To be clear, there should be no copy and paste. Each keystroke in the assignment should be your own.
   \item For students new to programming, this may take a while. Get started.
 \end{enumerate}
+```
+\section\*{Let's Make a Deal\\footnote{\\url{https://en.wikipedia.org/wiki/Let's_Make_a\_Deal}}}
 
-\section*{Let's Make a Deal\footnote{\url{https://en.wikipedia.org/wiki/Let's_Make_a_Deal}}}
 In the game show "Let's Make a Deal'', the candidate gets to choose one of three closed doors, and receives the prize behind the door they choose. Behind one door is a new car; behind the other two doors are goats. After the contestant selects one of the 3 doors, the host opens one of the other two doors, and reveals a goat. Now, the candidate has the option of either sticking with the door they originally selected, or switching to the only other door that is still closed. What should the candidate do, and why? What are the probabilities of winning the car if they stay versus if they switch? This question is known as the Monty Hall Problem.
 
+\subsection\*{Your tasks}
 
-\subsection*{Your tasks}
 For this problem set, you will not solve the Monty Hall Problem, but you will have to code a slightly simplified version of the "Let's Make a Deal" game. More specifically, you will set up a new class, which contains information regarding the door a player chooses, and a method that simulates a modified version of the game. You will have to do this using the S3 class system. Here are the specific instructions:
 
+```{=tex}
 \begin{enumerate}
   \item Define a new class: \texttt{door}. Objects of this class simply take on one numeric value: 1, 2, or 3 -- indicating which door a candidate chooses.
   \item Create a method for \texttt{door} objects that is called \texttt{PlayGame}. This method is supposed to do the following:
@@ -42,23 +46,18 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
     \item and a validation function that checks whether the value stored in \texttt{door} is actually an integer
   \end{itemize}
 \end{enumerate}
-
+```
 ```{r tidy=TRUE}
 #Define a new class. Inside the function the candidate choose which door
-door_choice <- function(choice){
-  if (choice == 1 )
-  return(choice)
-  if (choice == 2 )
-  return(choice)
-  if (choice == 3 )
-  return(choice)
-  
-  door_select <- list(selection= choice)
-  class(door_choice) <- "door"
+door <- function(choice){
+  if (choice %in% c(1,2,3)) {
+    door_choice <- list(door_selected= choice)
+    class(door_choice) <- "door"
   return(door_choice)
-}
+    }
+  }
 
-door_choice(1)
+door(3)
 
 #2
 PlayGame <- function(door) {
