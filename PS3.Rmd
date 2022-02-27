@@ -44,5 +44,21 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 \end{enumerate}
 
 ```{r tidy=TRUE}
-# Code
+#Define a new class. Inside the function the candidate choose which door
+door_choice <- function(choice){
+  if (choice == 1 )
+  return(choice)
+  if (choice == 2 )
+  return(choice)
+  if (choice == 3 )
+  return(choice)
+  
+  door_select <- list(selection= choice)
+  class(door_choice) <- "door"
+  return(door_choice)
+}
+
+door_choice(1)
+
+
 ```
