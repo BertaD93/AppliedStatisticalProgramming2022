@@ -48,7 +48,7 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 \end{enumerate}
 ```
 ```{r tidy=TRUE}
-#Define a new class. Inside the function the candidate choose which door
+#1. Create a function that choose a door. 
 door <- function(choice){
   if (choice %in% c(1,2,3)) {
     door_choice <- list(door_selected= choice)
@@ -57,18 +57,23 @@ door <- function(choice){
     }
   }
 
+#Test
 door(3)
 
 #2
-PlayGame <- function(door) {
+PlayGame <- function(door_choice) {
+  door_selected <- door_choice$door_selected
   car <- sample(1:3,1)
-  if (car == door) {
-    print("Congrats you just won a ner CAR!")
+  if (car == door_selected) {
+    print("Congrats you just won a new CAR!")
   }
   else {
     print("Sorry, you loose. Keep trying")
   }
 }
 
-PlayGame(door_choice(1))
+PlayGame(door(1))
+
+#3
+
 ```
