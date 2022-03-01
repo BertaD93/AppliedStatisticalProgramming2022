@@ -48,19 +48,19 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 \end{enumerate}
 ```
 ```{r tidy=TRUE}
-#1. Create a function that choose a door. 
-door <- function(choice){
-      door_choice <- list(door_selected= choice)
-      class(door_choice) <- "door"
-      return(door_choice)
+#1. Create a function that choose a door. Input= the door it is selected. Output= the door selected with a class.
+door <- function(choice){ #Create the function
+      door_choice <- list(door_selected= choice) #Store in an object a list the choice of door selected
+      class(door_choice) <- "door" #Store the attribute class to the door choice. 
+      return(door_choice) #Return the door choice.
   }
 
-#Test
+#Test the first function
 door(3)
 
-#2
-PlayGame <- function(door_choice) {
-  door_selected <- door_choice$door_selected
+#2 Crear Metodo.Function que sirve en el objeto door.  El argumento es la puerta que se selecciono
+PlayGame <- function(door) {
+  door_selected <- door$door_selected
   car <- sample(1:3,1)
   if (car == door_selected) {
     print("Congrats you just won a new CAR!")
@@ -70,9 +70,9 @@ PlayGame <- function(door_choice) {
   }
 }
 
-PlayGame(door(1))
+PlayGame(door(2))
 
-#3
+#3 Validator. Esta function me va a crear el objeto door solo si es 1 2 3. Output=objeto con class door
 
 new_door <- function(door_choice){
   if(!(door_choice %in% c(1,2,3))) {
