@@ -26,8 +26,6 @@ Due Wednesday, March 16, 10:00 AM (Before Class) \\
 Your task in this problem set is to combine two datasets in order to observe how many endorsements each candidate received using only \texttt{dplyr} functions. Use the same Presidential primary polls that were used for the in class worksheets on February 28 and March 2.
 
 ```{r eval=FALSE}
-# Change eval=FALSE in the code block. Install packages as appropriate.
-#install.packages("fivethirtyeight")
 library(fivethirtyeight)
 library(tidyverse)
 # URL to the data that you've used.
@@ -49,22 +47,47 @@ First, create two new objects \texttt{polls} and \texttt{Endorsements}. Then com
   \item Now, using the knowledge from the last step change the label of the X and Y axes to be more informative, add a title. Save the plot in your forked repository.
 \end{itemize}
 
+```{r}
+#Use rename function to change variable name
+endorsements <- Endorsements %>%  rename(candidate_name=endorsee) %>%  as.tibble()
+endorsements_count <- endorsements %>%  group_by(candidate_name) %>% summarise(count=n())
+
+spolls <- polls %>%  filter(candidate_name %in% c("Amy Klobuchar", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Michael Bloomberg", " Pete Buttigieg")) %>% select(candidate_name, sample_size, start_date, party, pct) 
+
+spolls <- spolls %>% mutate(new_name = case_when(spolls$candidate_name == "Bernard Sanders" ~ "Bernie Sanders",
+                                        spolls$candidate_name == "Joseph R. Biden Jr." ~ "Joe Biden",
+                                        TRUE ~ as.character(spolls$candidate_name))) %>% rename(old_name=candidate_name, candidate_name=new_name)
+join <- left_join(spolls, endorsements, by="candidate_name")
+
+#No se me ocurre como compararla
+# df1 <- Endorsements %>% select(endorsee) %>% distinct() %>% arrange(endorsee) %>%  rename(candidate_name=endorsee) %>% mutate(name=candidate_name)
+# df2 <- polls %>% select(candidate_name) %>% distinct %>% arrange(candidate_name) %>% mutate(name=candidate_name)
+# join <- full_join(df2, df1, by="candidate_name")
+# join_replace <- join %>%  mutate(new_name = case_when(name.x == name.y ~ name.x,
+#                                                         is.na(name.y) ~ name.x 
+#                                                         )) 
+
+spolls %>%  mutate(new_name = case_when(spolls$candidate_name == "Bernard Sanders" ~ "Bernie Sanders",
+                                        spolls$candidate_name == "Joseph R. Biden Jr." ~ "Joe Biden",
+                                        TRUE ~ as.character(spolls$candidate_name)))
+
+```
+
 
 \section*{Text-as-Data with \texttt{tidyverse}}
 
 For this question you will be analyzing Tweets from President Trump for various characteristics. Load in the following packages and data:
 
-```{r eval=FALSE}
-# Change eval=FALSE in the code block. Install packages as appropriate.
+```{r}
 library(tidyverse)
-#install.packages('tm')
 library(tm) 
-#install.packages('lubridate')
 library(lubridate)
-#install.packages('wordcloud')
 library(wordcloud)
+library(readr)
 trump_tweets_url <- 'https://politicaldatascience.com/PDS/Datasets/trump_tweets.csv'
 tweets <- read_csv(trump_tweets_url)
+
+
 ```
 
 \begin{itemize}
