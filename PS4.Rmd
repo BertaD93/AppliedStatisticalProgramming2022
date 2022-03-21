@@ -47,30 +47,23 @@ First, create two new objects \texttt{polls} and \texttt{Endorsements}. Then com
   \item Now, using the knowledge from the last step change the label of the X and Y axes to be more informative, add a title. Save the plot in your forked repository.
 \end{itemize}
 
-```{r}
+```{r eval=FALSE }
 #Use rename function to change variable name
-endorsements <- Endorsements %>%  rename(candidate_name=endorsee) %>%  as.tibble()
-endorsements_count <- endorsements %>%  group_by(candidate_name) %>% summarise(count=n())
+library(dplyr)
+endorsements <- Endorsements %>%  rename(candidate_name=endorsee) %>% as.tibble()
+endorsements_count <- endorsements %>%   filter(candidate_name %in% c("Amy Klobuchar", "Bernie Sanders", "Elizabeth Warren", "Joe Biden", "Pete Buttigieg")) %>% group_by(candidate_name) %>%  summarise(count=n())
 
-spolls <- polls %>%  filter(candidate_name %in% c("Amy Klobuchar", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Michael Bloomberg", " Pete Buttigieg")) %>% select(candidate_name, sample_size, start_date, party, pct) 
+spolls <- polls %>%  filter(candidate_name %in% c("Amy Klobuchar", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Michael Bloomberg", "Pete Buttigieg")) %>% select(candidate_name, sample_size, start_date, party, pct) 
 
 spolls <- spolls %>% mutate(new_name = case_when(spolls$candidate_name == "Bernard Sanders" ~ "Bernie Sanders",
                                         spolls$candidate_name == "Joseph R. Biden Jr." ~ "Joe Biden",
                                         TRUE ~ as.character(spolls$candidate_name))) %>% rename(old_name=candidate_name, candidate_name=new_name)
-join <- left_join(spolls, endorsements, by="candidate_name")
+join <- left_join(spolls, endorsements_count, by="candidate_name")
 
-#No se me ocurre como compararla
-# df1 <- Endorsements %>% select(endorsee) %>% distinct() %>% arrange(endorsee) %>%  rename(candidate_name=endorsee) %>% mutate(name=candidate_name)
-# df2 <- polls %>% select(candidate_name) %>% distinct %>% arrange(candidate_name) %>% mutate(name=candidate_name)
-# join <- full_join(df2, df1, by="candidate_name")
-# join_replace <- join %>%  mutate(new_name = case_when(name.x == name.y ~ name.x,
-#                                                         is.na(name.y) ~ name.x 
-#                                                         )) 
-
-spolls %>%  mutate(new_name = case_when(spolls$candidate_name == "Bernard Sanders" ~ "Bernie Sanders",
-                                        spolls$candidate_name == "Joseph R. Biden Jr." ~ "Joe Biden",
-                                        TRUE ~ as.character(spolls$candidate_name)))
-
+library(ggplot2)
+p <- ggplot(data=endorsements_count , aes(x=candidate_name, y=count)) +
+  geom_bar(stat="identity")
+p + theme_dark()
 ```
 
 
@@ -98,3 +91,39 @@ tweets <- read_csv(trump_tweets_url)
   \item Now create a \texttt{wordcloud} to visualize the top 50 words the President uses in his tweets. Use only words that occur at least three times. Display the plot with words in random order and use 50 random colors. Save the plot into your forked repository.\item Create a \textit{document term matrix} called \texttt{DTM} that includes the argument \texttt{ control = list(weighting = weightTfIdf)}
   \item Finally, report the 50 words with the the highest tf.idf scores using a lower frequency bound of .8.
 \end{itemize}
+```{r}
+#1
+s_tweets <- tweets %>% separate(created_at, into = c("sdate", "stime"), sep = " ") %>% mutate(dates = as.Date(sdate, "%m/%d/%Y"))
+#Me falta reportar el rango
+#2
+top5_rt <- s_tweets %>% filter(is_retweet==FALSE) %>% slice_max( retweet_count, n = 5)
+
+top5_fav <- s_tweets %>% filter(is_retweet==FALSE) %>% slice_max(favorite_count, n = 5)
+
+#Falta match
+
+#3
+
+Corpus_trump <- VCorpus(VectorSource(s_tweets$text))
+
+inspect(Corpus_trump[[2]])
+
+#4
+Corpus_trump  <- Corpus_trump %>%  tm_map(stripWhitespace) %>% 
+                  tm_map(content_transformer(tolower)) %>% 
+                   tm_map(removeWords, stopwords("english")) %>% 
+                    tm_map(removeNumbers) %>% 
+                      tm_map(removePunctuation)
+                    
+#5
+set.seed(1234) # for reproducibility 
+wordcloud(Corpus_trump, min.freq = 1,           max.words=50, random.order=FALSE, rot.per=0.35,            colors=brewer.pal(8, "Dark2"))
+
+#6
+
+tdm <- TermDocumentMatrix(Corpus_trump, control = list(weighting
+= weightTfIdf))
+
+
+```
+
