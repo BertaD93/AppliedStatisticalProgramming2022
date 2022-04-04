@@ -31,7 +31,7 @@ setMethod( #Set Method
       step <- (limits[2] - limits[1]) / n
       x <- seq(limits[1], limits[2], by = step)
       f <- fun(x)
-      integral_object <- integrateIt(x, f, limits, rule)
+      integral_object <- integrateIt(x, f, limits, rule) #Use integrateIt
       integral_estimation <- integral_object@result #Access to the rule was set: trapezoid or simpsons
       correct <- integrate(fun, limits[1], limits[2])$value #This is the exact calculation of the integrate
       error <- abs(correct - integral_estimation) #Calculate the error
