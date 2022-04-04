@@ -8,7 +8,7 @@
 Trapezoidal class
 }
 \description{
-Technique for approximating the definite integral,
+Technique for approximating the definite integral
 }
 \section{Slots}{
 

@@ -7,11 +7,31 @@
 tolTest(fun, tolerance, rule, start, limits, ...)
 }
 \arguments{
+\item{fun}{function. A function to be evaluated}
+
+\item{tolerance}{numeric. The tolerance we want to set}
+
+\item{rule}{character. Trapezoidal or Simpsons rule}
+
+\item{start}{numeric. The initial n}
+
+\item{limits}{numeric. The limits of the integral}
+
 \item{...}{}
 }
 \value{
 
 }
 \description{
-Tolarence test
+Function and increase the number of intervals n until the answer it provides using
+ the specified approximation is within tolerance of the correct answer
+}
+\examples{
+fun = function(x) sin(x)
+tolerance = 0.001
+rule = "Trapezoid"
+start = 10
+limits = c(1,10)
+tolTest(fun=fun, tolerance=tolerance, rule=rule, start=start, limits=limits)
+
 }

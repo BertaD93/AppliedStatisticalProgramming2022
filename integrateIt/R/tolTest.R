@@ -7,7 +7,7 @@
 #' @param fun function. A function to be evaluated
 #' @param tolerance numeric. The tolerance we want to set
 #' @param rule character. Trapezoidal or Simpsons rule
-#' @param start numeric. The start n
+#' @param start numeric. The initial n
 #' @param limits numeric. The limits of the integral
 #' @param ...
 #'
@@ -15,6 +15,13 @@
 #' @export
 #'
 #' @examples
+#' fun = function(x) sin(x)
+#' tolerance = 0.001
+#' rule = "Trapezoid"
+#' start = 10
+#' limits = c(1,10)
+#' tolTest(fun=fun, tolerance=tolerance, rule=rule, start=start, limits=limits)
+#'
 setGeneric(name="tolTest", #Set Generic
            def=function(fun, tolerance, rule, start, limits,...)
            {standardGeneric("tolTest")}
