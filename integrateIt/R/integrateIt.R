@@ -19,7 +19,7 @@
 #' limits = c(1,10)
 #' integrateIt(x, f, limits, "Simpson")
 #' integrateIt(x, f, limits, "Trapezoid")
-setGeneric(
+setGeneric( #Create a generic
   name = "integrateIt",
   def = function(x, f, limits, rule, ...)
   {standardGeneric("integrateIt")}
@@ -27,27 +27,27 @@ setGeneric(
 
 
 #' @export
-setMethod(
+setMethod( #Create the functions to determine the approximation integral.
   f = "integrateIt",
   definition = function(x, f, limits, rule, ...){
-    # Validation of inout
-    #
+    # Validation of inpout
+
     n <-length(x)-1
     h <- (limits[2] - limits[1])/n
 
-    if(rule == "Trapezoid"){
+    if(rule == "Trapezoid"){ #Create a function to calculate trapezoidal rule
 
-      result = (h / 2) * (f %*% c(1, rep(2, n-1), 1))
+      result <- (h / 2) * (f %*% c(1, rep(2, n-1), 1))
 
-      result = result[1,1] # %*% operator returns matrix type
+      result <- result[1,1] # %*% operator returns matrix type
 
       return(new("Trapezoid", x = x, f = f, result=result))
 
-    } else if(rule == "Simpson"){
+    } else if(rule == "Simpson"){ #Create a function to calculate simpsons rule
 
       result <- (h / 3) * f %*% c(1, 2 ^ (1:(n-1) %% 2 + 1), 1)
 
-      result = result[1,1] # %*% operator returns matrix type
+      result <- result[1,1] # %*% operator returns matrix type
 
       return(new("Simpson", x = x, f = f, result=result))
 
