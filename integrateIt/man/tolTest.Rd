@@ -2,7 +2,7 @@
 % Please edit documentation in R/tolTest.R
 \name{tolTest}
 \alias{tolTest}
-\title{Title}
+\title{Tolarence test}
 \usage{
 tolTest(fun, tolerance, rule, start, limits, ...)
 }
@@ -13,5 +13,5 @@ tolTest(fun, tolerance, rule, start, limits, ...)
 
 }
 \description{
-Title
+Tolarence test
 }

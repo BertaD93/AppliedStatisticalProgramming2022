@@ -7,9 +7,12 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 
 ## This can be run many times as the code is updates
-current.code <- as.package("integrateit") #trata a la carpeta como paquete
-load_all(current.code) #todo lo que este en el directorio load all, abre el directorio. Abre integrat
-document(current.code) #Abre los archivos y crea rd
+
+current.code <- as.package("integrateIt")
+load_all(current.code)
+document(current.code)
+
+
 
 x = 1:10
 f = 1:10

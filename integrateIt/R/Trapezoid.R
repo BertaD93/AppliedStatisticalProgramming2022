@@ -1,7 +1,7 @@
 
 #' Trapezoidal Rule
 #'
-#' Technique for approximating the definite integral,
+#' Technique for approximating the definite integral
 #'
 #' @slot x numeric. A vector of values
 #' @slot f numeric. A vector of evaluated values
@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' new("Trapezoid", x=1:10, f=1:10, result = 49.5)
-setClass(
+setClass( #We need to setClass to create the structure
   Class = "Trapezoid",
   representation = representation(
     x = "numeric",
@@ -30,7 +30,7 @@ setClass(
 setValidity(
   "Trapezoid",
   function(object){
-    # Check lenght vectors
+    # Check length vectors
     if(length(object@x) != length(object@f)) stop("Both lengths of x & f must be equal")
     # Check x sort
     if(!all(sort(object@x) == object@x)) stop("x vector must be ordered!")
@@ -40,7 +40,7 @@ setValidity(
 )
 
 #' @export
-setMethod(
+setMethod( #Initialize Method
   "initialize",
   "Trapezoid",
   function(.Object, ...) {
@@ -51,7 +51,7 @@ setMethod(
 )
 
 #' @export
-setMethod(
+setMethod( #Use show to print only the approximated integrate
   f = "show",
   signature = "Trapezoid",
   definition = function(object){
