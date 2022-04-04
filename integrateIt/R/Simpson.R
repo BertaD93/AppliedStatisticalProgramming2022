@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' new("Simpson", x=1:10, f=1:10, result = 49.5)
-setClass(
+setClass( #We need to setClass to create the structure
   Class = "Simpson",
   representation = representation(
     x = "numeric",
@@ -27,7 +27,7 @@ setClass(
 )
 
 #' @export
-setValidity(
+setValidity( #Create a validator, we can add more validation as we want
   "Simpson",
   function(object){
     # Check length vectors
@@ -40,11 +40,11 @@ setValidity(
 )
 
 #' @export
-setMethod(
-  "initialize", #nueva clase, corre ese comando
+setMethod( #Initialize Method
+  "initialize", #It is a new class
   "Simpson",
   function(.Object, ...) {
-    value = callNextMethod() #llamar algun metodo que se llame simpson
+    value = callNextMethod() #Call the method Simpson
     validObject(value)
     return(value)
   }
@@ -52,7 +52,7 @@ setMethod(
 
 #' @export
 setMethod(
-  f = "show", #Print method
+  f = "show", ##Use show method to print only the approximated integrate
   signature = "Simpson",
   definition = function(object){
     print(object@result)

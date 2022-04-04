@@ -27,7 +27,7 @@ setClass( #We need to setClass to create the structure
 )
 
 #' @export
-setValidity(
+setValidity( #Create a validator, we can add more validation as we want
   "Trapezoid",
   function(object){
     # Check length vectors
@@ -41,17 +41,17 @@ setValidity(
 
 #' @export
 setMethod( #Initialize Method
-  "initialize",
+  "initialize", #It is a new class
   "Trapezoid",
   function(.Object, ...) {
-    value = callNextMethod()
+    value = callNextMethod() #Call the method Trapezoid
     validObject(value)
     return(value)
   }
 )
 
 #' @export
-setMethod( #Use show to print only the approximated integrate
+setMethod( #Use show method to print only the approximated integrate
   f = "show",
   signature = "Trapezoid",
   definition = function(object){
