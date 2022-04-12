@@ -24,4 +24,4 @@ setMethod( #Create the function to calculate the standard error
 
   }
 )
-mle(y)
+
