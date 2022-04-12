@@ -26,7 +26,7 @@ setGeneric( #Create a generic
 #' @export
 setMethod( #Create the function to calculate the log likelihood for the observed data
 f = "logLik",
-definition = function(y, lambda, ...){ #Start function
+definition = function(y, lambda){ #Start function
   n <- length(y) #n is the number of elements in 'y' vector
   ll <- -n*lambda- sum(lfactorial(y))+ log(lambda)*sum(y) #Calculate the loglikelihood for the observed data conditioned in lambda
 
