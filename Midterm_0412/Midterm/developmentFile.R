@@ -3,7 +3,7 @@ library(roxygen2)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 
-current.code <- as.package("easyPois")
+current.code <- as.package("Midterm")
 load_all(current.code)
 document(current.code)
 #devtools::check(current.code)
@@ -22,3 +22,5 @@ estimatePois_test = estimatePois(y_test, "basic")
 
 #new("PoisMLE", y = 1,mle=-1, ll=1, se=1, SEtype="") This line I used to test
 plot(estimatePois_test) #test plot
+
+
