@@ -2,16 +2,28 @@
 % Please edit documentation in R/logLik.R
 \name{logLik}
 \alias{logLik}
-\title{Title}
+\title{Log likelihood}
 \usage{
-logLik(y, lambda, ...)
+logLik(y, lambda)
 }
 \arguments{
-\item{...}{}
+\item{y}{numeric. The vector of observed data}
+
+\item{lambda}{numeric. The assume value of lambda}
 }
 \value{
-
+Log likelihood
 }
 \description{
-Title
+Calculate the log likelihood for the observed data
+}
+\examples{
+y = c(1,2,3,4)
+lambda = 4
+logLik(y,lambda)
+}
+\author{
+Berta Diaz
+
+Berta Diaz
 }

@@ -2,16 +2,23 @@
 % Please edit documentation in R/mle.R
 \name{mle}
 \alias{mle}
-\title{Title}
+\title{Maximum likelihood}
 \usage{
-mle(y, ...)
+mle(y)
 }
 \arguments{
-\item{...}{}
+\item{y}{numeric. The vector of observed data}
 }
 \value{
 
 }
 \description{
-Title
+Calculates the maximum likelihood estimator for lambda
+}
+\examples{
+y=c(1,2,3,4)
+mle(y)
+}
+\author{
+Berta Diaz
 }

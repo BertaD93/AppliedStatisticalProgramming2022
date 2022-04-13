@@ -2,16 +2,28 @@
 % Please edit documentation in R/estimatePois.R
 \name{estimatePois}
 \alias{estimatePois}
-\title{Title}
+\title{estimatePois}
 \usage{
-estimatePois(y, lambda, SEtype, ...)
+estimatePois(y, SEtype, ...)
 }
 \arguments{
+\item{y}{numeric. A vector of observed data}
+
+\item{SEtype}{character. The method used to calculate the standard error: basic or bootstrap}
+
 \item{...}{}
 }
 \value{
 
 }
 \description{
-Title
+Returns an object of class PoisMLE
+}
+\examples{
+y_test = rpois(100,4)
+estimatePois(y_test, SEtype = "bootstrap")
+
+}
+\author{
+Berta Diaz
 }
