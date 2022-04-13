@@ -12,7 +12,7 @@
 #' @return
 #' @export
 #'
-#' @examples
+
 setClass(#We need to setClass to create the structure
   Class = "PoisMLE",
   representation = representation(

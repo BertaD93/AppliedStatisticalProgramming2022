@@ -21,30 +21,31 @@ setGeneric( #Create a generic
 
 
 #' @export
-setMethod( #Create the functions
+setMethod( #Set Method
   f = "standardError",
-  definition = function(y, SEtype){
+  definition = function(y, SEtype){ #Start the function
 
-    n <-length(y)
+    n <-length(y) #Number of observations in y
 
     if(SEtype == "basic"){ #Create a function
 
-    se_basic <- sqrt(mle(y)/n)
+      se_basic <- sqrt(mle(y)/n) #Calculate basic standard error
 
       return(se_basic)
 
     } else if(SEtype == "bootstrap"){
       B <- 50 #The B is going to be equal to 50
-        for(i in 1:B) {
-          samples[[i]] <-  sample(y, n, replace= TRUE)#Set a sample with size n, replacement
-        }
-      msample <- matrix(unlist(samples), n, B)#Matrix form
-      mean_mle <- apply(msample, 2, mle)#Calculate the mle throughout all the matrix with apply
-      sdev <- sd(mean_mle)#Calculate the standard deviation
-      return(sdev)#Return the standard deviation
+      samples = list()
+      for(i in 1:B) {
+        samples[[i]] <-  sample(y, n, replace= TRUE) #Set a sample with size n, replacement
+      }
+      msample <- matrix(unlist(samples), n, B) #Matrix form
+      mean_mle <- apply(msample, 2, mle) #Calculate the mle throughout all the matrix with apply
+      sdev <- sd(mean_mle) #Calculate the standard deviation
+      return(sdev) #Return the standard deviation
 
     } else {
-      stop("SEtype not sopported!")#In case the rule is not supported, then stopped
+      stop("SEtype not sopported!") #In case the rule is not supported, then stopped
     }
 
   }

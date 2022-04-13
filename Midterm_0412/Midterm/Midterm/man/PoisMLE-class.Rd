@@ -3,24 +3,27 @@
 \docType{class}
 \name{PoisMLE-class}
 \alias{PoisMLE-class}
-\title{Title}
+\title{PoisMLE}
 \value{
 
 }
 \description{
-Title
+Create an object of class PoisMLE and a plot tgat show the MLE and standard errors (1.96)
 }
 \section{Slots}{
 
 \describe{
-\item{\code{y}}{numeric.}
+\item{\code{y}}{numeric.The original data}
 
-\item{\code{mle}}{numeric.}
+\item{\code{mle}}{numeric. The maximum likelihood estimator for this dataset}
 
-\item{\code{ll}}{numeric.}
+\item{\code{ll}}{numeric. The log likelihood calculated from the observed data}
 
-\item{\code{se}}{numeric.}
+\item{\code{se}}{numeric. Standard error for the MLE}
 
-\item{\code{SEtype}}{character.}
+\item{\code{SEtype}}{character. The method used to calculate the standard error: basic or bootstrap}
 }}
 
+\author{
+Berta Diaz
+}
